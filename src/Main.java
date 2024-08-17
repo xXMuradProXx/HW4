@@ -93,12 +93,7 @@ public class Main {
         queue.add(new MyCloneable(2));
         queue.add(new MyCloneable(3));
 
-        IsraeliQueue<MyCloneable> clonedQueue = null;
-        try {
-            clonedQueue = queue.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
+        IsraeliQueue<MyCloneable> clonedQueue = queue.clone();
 
         Iterator<MyCloneable> iterator = queue.iterator();
         Iterator<MyCloneable> clonedIterator = clonedQueue.iterator();
@@ -116,7 +111,11 @@ public class Main {
 
     public static void test2(){
         IsraeliQueue<MyCloneable> queue = new IsraeliQueue<>();
-        queue.add(null);
+        try {
+            queue.add(null);
+        }catch (InvalidInputException e){
+            System.out.println("Exception caught: " + e);
+        }
     }
 
     public static void test3(){
