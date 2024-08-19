@@ -1,4 +1,4 @@
-public class Person {
+public class Person implements Cloneable {
     private String name; // The name of the person
     private int id; // The unique ID of the person
     private Person friend; // The friend of the person
@@ -32,7 +32,8 @@ public class Person {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof Person other)) return false;
+        if (!(obj instanceof Person)) return false;
+        Person other = (Person) obj;
         return this.id == other.id; // Two people are equal if they have the same ID
     }
 
@@ -44,4 +45,18 @@ public class Person {
         return friend;
     }
 
+    /**
+     * Clones the person .
+     * @return a clone of the person
+     */
+    @Override
+    public Person clone() {
+        try {
+            Person clone = (Person) super.clone();
+            clone.friend = this.friend.clone();
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
 }

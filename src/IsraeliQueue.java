@@ -1,6 +1,6 @@
 import java.util.Iterator;
 
-public class IsraeliQueue<E> implements Cloneable, Iterable<E> {
+public class IsraeliQueue<E extends Cloneable> implements Cloneable, Iterable<E> {
     private Node<Node<E>> head; // the head of the queue
     private Node<E> tail; // the tail of the queue
     private int size; // the size of the queue
@@ -106,7 +106,7 @@ public class IsraeliQueue<E> implements Cloneable, Iterable<E> {
      * @return a clone of the queue
      */
     @Override
-    protected IsraeliQueue<E> clone() {
+    public IsraeliQueue<E> clone() {
         try {
             IsraeliQueue<E> clone = (IsraeliQueue<E>) super.clone(); // shallow copy
             clone.head = this.head.clone(); // deep copy
